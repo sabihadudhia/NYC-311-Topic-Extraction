@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import argparse
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation, TruncatedSVD
 from sklearn.cluster import KMeans
@@ -13,7 +14,48 @@ print("="*80)
 print("ADVANCED TOPIC ANALYSIS")
 print("="*80)
 
-df = pd.read_csv(r"C:\Users\sabih\OneDrive\Desktop\Project -  Data Analysis\preprocessed_data.csv")
+def parse_topic_range():
+    parser = argparse.ArgumentParser(description="Advanced topic analysis with LDA and K-Means")
+    parser.add_argument(
+        "--topic-range",
+        type=str,
+        default="5,7,10",
+        help="Comma-separated list of topic counts to evaluate for LDA (e.g., 5,8,12,15)"
+    )
+    parser.add_argument(
+        "--cluster-range",
+        type=str,
+        default="5,7,10",
+        help="Comma-separated list of cluster counts to evaluate for K-Means (e.g., 4,6,8,10)"
+    )
+    args = parser.parse_args()
+
+    try:
+        topic_range = [int(value.strip()) for value in args.topic_range.split(',') if value.strip()]
+    except ValueError:
+        raise ValueError("Invalid --topic-range. Use comma-separated integers, e.g., 5,7,10")
+
+    try:
+        cluster_range = [int(value.strip()) for value in args.cluster_range.split(',') if value.strip()]
+    except ValueError:
+        raise ValueError("Invalid --cluster-range. Use comma-separated integers, e.g., 5,7,10")
+
+    if not topic_range:
+        raise ValueError("--topic-range must contain at least one integer")
+    if any(topic <= 1 for topic in topic_range):
+        raise ValueError("All topic counts in --topic-range must be greater than 1")
+    if not cluster_range:
+        raise ValueError("--cluster-range must contain at least one integer")
+    if any(cluster <= 1 for cluster in cluster_range):
+        raise ValueError("All cluster counts in --cluster-range must be greater than 1")
+
+    return sorted(set(topic_range)), sorted(set(cluster_range))
+
+topic_range, cluster_range = parse_topic_range()
+print(f"Using topic range: {topic_range}")
+print(f"Using cluster range: {cluster_range}")
+
+df = pd.read_csv(r"C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\preprocessed_data.csv")
 corpus = df['Problem Detail (formerly Descriptor)'].fillna('').astype(str).values
 
 print(f"\nLoaded {len(corpus)} documents")
@@ -65,8 +107,36 @@ print("\n" + "="*80)
 print("LDA TOPIC MODELING - PARAMETER TUNING")
 print("="*80)
 
-topic_range = [5, 7, 10]
+def compute_umass_coherence(model, doc_term_matrix, n_top_words=15):
+    binary_matrix = (doc_term_matrix > 0).astype(np.int64)
+    doc_frequencies = np.asarray(binary_matrix.sum(axis=0)).ravel()
+    co_occurrence = (binary_matrix.T @ binary_matrix).toarray()
+
+    topic_scores = []
+    for topic in model.components_:
+        top_indices = topic.argsort()[-n_top_words:][::-1]
+        pair_scores = []
+
+        for m in range(1, len(top_indices)):
+            wi = top_indices[m]
+            for l in range(m):
+                wj = top_indices[l]
+                co_count = co_occurrence[wi, wj]
+                wj_count = doc_frequencies[wj]
+                if wj_count > 0:
+                    pair_scores.append(np.log((co_count + 1) / wj_count))
+
+        if pair_scores:
+            topic_scores.append(float(np.mean(pair_scores)))
+
+    if not topic_scores:
+        return float('-inf')
+
+    coherence = float(np.mean(topic_scores))
+    return coherence if np.isfinite(coherence) else float('-inf')
+
 best_perplexity = float('inf')
+best_coherence = float('-inf')
 best_lda = None
 best_n_topics = 0
 
@@ -81,14 +151,23 @@ for n_topics in topic_range:
     )
     lda_model.fit(bow_matrix)
     perplexity = lda_model.perplexity(bow_matrix)
+    coherence = compute_umass_coherence(lda_model, bow_matrix, n_top_words=15)
+    if not np.isfinite(coherence):
+        coherence = float('-inf')
     print(f"  Perplexity: {perplexity:.2f}")
+    print(f"  UMass coherence: {coherence:.4f}")
     
-    if perplexity < best_perplexity:
+    if (coherence > best_coherence) or (np.isclose(coherence, best_coherence) and perplexity < best_perplexity):
+        best_coherence = coherence
         best_perplexity = perplexity
         best_lda = lda_model
         best_n_topics = n_topics
 
-print(f"\nBest model: {best_n_topics} topics (perplexity: {best_perplexity:.2f})")
+print(f"\nBest model: {best_n_topics} topics (UMass coherence: {best_coherence:.4f}, perplexity: {best_perplexity:.2f})")
+
+if best_lda is None:
+    raise RuntimeError("LDA model selection failed. Check topic range and input data.")
+
 lda_topics = best_lda.fit_transform(bow_matrix)
 
 print("\n" + "-"*80)
@@ -125,7 +204,6 @@ print("\n" + "="*80)
 print("K-MEANS CLUSTERING - PARAMETER TUNING")
 print("="*80)
 
-cluster_range = [5, 7, 10]
 best_silhouette = -1
 best_kmeans = None
 best_n_clusters = 0
@@ -193,7 +271,7 @@ print("\n" + "="*80)
 print("GENERATING VISUALIZATIONS")
 print("="*80)
 
-output_dir = r"C:\Users\sabih\OneDrive\Desktop\Project -  Data Analysis"
+output_dir = r"C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis"
 
 # Word Clouds for LDA Topics
 print("\nGenerating word clouds for LDA topics...")
@@ -274,6 +352,7 @@ print(f"Added columns: LDA_Topic, KMeans_Cluster")
 analysis_summary = {
     'LDA_Topics': best_n_topics,
     'LDA_Perplexity': best_perplexity,
+    'LDA_UMass_Coherence': best_coherence,
     'KMeans_Clusters': best_n_clusters,
     'KMeans_Silhouette': best_silhouette,
     'SVD_Components': n_components,
@@ -290,13 +369,14 @@ print("\n" + "="*80)
 print("RECOMMENDATIONS")
 print("="*80)
 
-print(f"\n✓ Best LDA configuration: {best_n_topics} topics")
-print(f"✓ Best K-Means configuration: {best_n_clusters} clusters with SVD")
-print(f"\n✓ Generated visualizations:")
+print(f"\n[OK] Best LDA configuration: {best_n_topics} topics")
+print(f"[OK] Best LDA UMass coherence: {best_coherence:.4f} (higher is better)")
+print(f"[OK] Best K-Means configuration: {best_n_clusters} clusters with SVD")
+print(f"\n[OK] Generated visualizations:")
 print(f"  - lda_wordclouds.png")
 print(f"  - tsne_visualization.png")
 print(f"  - distribution_plots.png")
-print(f"\n✓ Cross-tabulation shows alignment between LDA and K-Means")
-print(f"✓ Using n-grams (1-3) captures meaningful phrases like 'blocked hydrant'")
+print(f"\n[OK] Cross-tabulation shows alignment between LDA and K-Means")
+print(f"[OK] Using n-grams (1-3) captures meaningful phrases like 'blocked hydrant'")
 
 print("\nCompleted successfully!")

@@ -5,7 +5,7 @@ print("="*80)
 print("TEXT VECTORIZATION")
 print("="*80)
 
-file_path = r"C:\Users\sabih\OneDrive\Desktop\Project -  Data Analysis\preprocessed_data.csv"
+file_path = r"C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\preprocessed_data.csv"
 
 try:
     df = pd.read_csv(file_path)

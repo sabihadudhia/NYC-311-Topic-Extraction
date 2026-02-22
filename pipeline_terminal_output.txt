@@ -1,0 +1,1092 @@
+====================================================================================================
+NLP PIPELINE COMBINED TERMINAL OUTPUT
+====================================================================================================
+Generated at: 2026-02-22 09:56:16
+
+Execution Summary:
+1. data_preprocessing.py -> SUCCESS (exit=0, duration=15.83s)
+2. text_vectorization.py -> SUCCESS (exit=0, duration=2.84s)
+3. topic_extraction.py -> SUCCESS (exit=0, duration=60.12s)
+4. advanced_topic_analysis.py -> SUCCESS (exit=0, duration=159.48s)
+
+----------------------------------------------------------------------------------------------------
+STEP 1: data_preprocessing.py
+----------------------------------------------------------------------------------------------------
+Script Path : C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\data_preprocessing.py
+Command     : C:\Users\sabih\AppData\Local\Programs\Python\Python312\python.exe C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\data_preprocessing.py
+Started At  : 2026-02-22 09:52:18
+Finished At : 2026-02-22 09:52:34
+Duration    : 15.83 seconds
+Exit Code   : 0
+
+Output:
+[STDOUT]
+================================================================================
+DATA PREPROCESSING PIPELINE
+================================================================================
+
+Loaded dataset: 18590 rows, 44 columns
+
+First 5 rows:
+   Unique Key  ...                                  Location
+0    67366989  ...  POINT (-73.844246058087 40.779590452288)
+1    67369738  ...   POINT (-73.86316717921 40.844263722896)
+2    67366175  ...  POINT (-74.001035186689 40.708691774635)
+3    67361798  ...   POINT (-73.95494386354 40.647716040582)
+4    67369728  ...  POINT (-73.869637348593 40.855016745853)
+
+[5 rows x 44 columns]
+
+Column info:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 18590 entries, 0 to 18589
+Data columns (total 44 columns):
+ #   Column                                Non-Null Count  Dtype  
+---  ------                                --------------  -----  
+ 0   Unique Key                            18590 non-null  int64  
+ 1   Created Date                          18590 non-null  object 
+ 2   Closed Date                           17312 non-null  object 
+ 3   Agency                                18590 non-null  object 
+ 4   Agency Name                           18590 non-null  object 
+ 5   Problem (formerly Complaint Type)     18590 non-null  object 
+ 6   Problem Detail (formerly Descriptor)  18255 non-null  object 
+ 7   Additional Details                    9486 non-null   object 
+ 8   Location Type                         16980 non-null  object 
+ 9   Incident Zip                          18457 non-null  float64
+ 10  Incident Address                      18081 non-null  object 
+ 11  Street Name                           18080 non-null  object 
+ 12  Cross Street 1                        10257 non-null  object 
+ 13  Cross Street 2                        10266 non-null  object 
+ 14  Intersection Street 1                 9844 non-null   object 
+ 15  Intersection Street 2                 9854 non-null   object 
+ 16  Address Type                          18507 non-null  object 
+ 17  City                                  18040 non-null  object 
+ 18  Landmark                              8943 non-null   object 
+ 19  Facility Type                         36 non-null     object 
+ 20  Status                                18590 non-null  object 
+ 21  Due Date                              59 non-null     object 
+ 22  Resolution Description                18140 non-null  object 
+ 23  Resolution Action Updated Date        18212 non-null  object 
+ 24  Community Board                       18590 non-null  object 
+ 25  Council District                      18319 non-null  float64
+ 26  Police Precinct                       18590 non-null  object 
+ 27  BBL                                   17110 non-null  float64
+ 28  Borough                               18590 non-null  object 
+ 29  X Coordinate (State Plane)            18378 non-null  object 
+ 30  Y Coordinate (State Plane)            18378 non-null  object 
+ 31  Open Data Channel Type                18590 non-null  object 
+ 32  Park Facility Name                    18569 non-null  object 
+ 33  Park Borough                          18590 non-null  object 
+ 34  Vehicle Type                          602 non-null    object 
+ 35  Taxi Company Borough                  13 non-null     object 
+ 36  Taxi Pick Up Location                 157 non-null    object 
+ 37  Bridge Highway Name                   89 non-null     object 
+ 38  Bridge Highway Direction              52 non-null     object 
+ 39  Road Ramp                             48 non-null     object 
+ 40  Bridge Highway Segment                90 non-null     object 
+ 41  Latitude                              18378 non-null  float64
+ 42  Longitude                             18378 non-null  float64
+ 43  Location                              18378 non-null  object 
+dtypes: float64(5), int64(1), object(38)
+memory usage: 6.2+ MB
+None
+
+================================================================================
+STEP 1: COLUMN SELECTION
+================================================================================
+Retained 6 columns: ['Created Date', 'Problem (formerly Complaint Type)', 'Problem Detail (formerly Descriptor)', 'Status', 'Resolution Description', 'Borough']
+Shape: (18590, 6)
+
+================================================================================
+STEP 2: LOWERCASE CONVERSION
+================================================================================
+Data has been converted to lowercase
+Removing punctuation and numbers from data...
+Punctuation and numbers have been removed from the data (except slashes)
+Removing stop words...
+Stop words have been removed
+Performing tokenization (splitting text into words)...
+Tokenization completed
+Performing lemmatization...
+Lemmatization completed
+Removing duplicate rows...
+Removed 203 duplicate rows
+Remaining rows: 18387
+
+================================================================================
+FINAL SUMMARY
+================================================================================
+
+Shape: 18387 rows × 6 columns
+Columns: ['Created Date', 'Problem (formerly Complaint Type)', 'Problem Detail (formerly Descriptor)', 'Status', 'Resolution Description', 'Borough']
+Missing values: 0
+
+First 5 rows:
+             Created Date  ...    Borough
+0  01/02/2026 11:44:59 PM  ...      queen
+1  01/02/2026 11:44:56 PM  ...      bronx
+2  01/02/2026 11:44:49 PM  ...  manhattan
+3  01/02/2026 11:44:45 PM  ...   brooklyn
+4  01/02/2026 11:44:11 PM  ...      bronx
+
+[5 rows x 6 columns]
+
+================================================================================
+SAVING OUTPUT
+================================================================================
+
+Saved to: C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\preprocessed_data.csv
+
+Preprocessing completed successfully!
+[STDERR]
+C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\data_preprocessing.py:14: DtypeWarning: Columns (21,35) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(file_path)
+
+----------------------------------------------------------------------------------------------------
+STEP 2: text_vectorization.py
+----------------------------------------------------------------------------------------------------
+Script Path : C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\text_vectorization.py
+Command     : C:\Users\sabih\AppData\Local\Programs\Python\Python312\python.exe C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\text_vectorization.py
+Started At  : 2026-02-22 09:52:34
+Finished At : 2026-02-22 09:52:37
+Duration    : 2.84 seconds
+Exit Code   : 0
+
+Output:
+[STDOUT]
+================================================================================
+TEXT VECTORIZATION
+================================================================================
+
+Loaded 18387 documents
+
+================================================================================
+TF-IDF VECTORIZATION
+================================================================================
+
+Matrix shape: (18387, 711)
+Vocabulary sample: ['access', 'ad', 'ago', 'air', 'air condition', 'air odor', 'alarm', 'alarm nr', 'allowed', 'allowed smoke']
+
+Summary:
+  Vocabulary size: 711
+  Avg words/doc: 3.15
+  Min words/doc: 0
+  Max words/doc: 13
+  Median words/doc: 3.00
+
+================================================================================
+BAG OF WORDS VECTORIZATION
+================================================================================
+
+Matrix shape: (18387, 374)
+Vocabulary sample: ['access', 'ad', 'ago', 'air', 'alarm', 'allowed', 'alternate', 'animal', 'apartment', 'area']
+
+Top 20 most frequent words:
+   1. building             -   3231 occurrences
+   2. entire               -   3124 occurrences
+   3. loud                 -   1939 occurrences
+   4. music                -   1737 occurrences
+   5. apartment            -   1736 occurrences
+   6. party                -   1677 occurrences
+   7. blocked              -   1398 occurrences
+   8. hydrant              -   1060 occurrences
+   9. access               -   1047 occurrences
+  10. banging              -    958 occurrences
+  11. pounding             -    958 occurrences
+  12. parking              -    872 occurrences
+  13. violation            -    669 occurrences
+  14. sign                 -    598 occurrences
+  15. posted               -    556 occurrences
+  16. sidewalk             -    322 occurrences
+  17. use                  -    316 occurrences
+  18. plate                -    307 occurrences
+  19. license              -    298 occurrences
+  20. vehicle              -    271 occurrences
+
+Summary:
+  Vocabulary size: 374
+  Avg unique words/doc: 2.06
+  Median unique words/doc: 2.00
+  Avg total words/doc: 2.06
+  Total words (all docs): 37952
+
+----------------------------------------------------------------------------------------------------
+STEP 3: topic_extraction.py
+----------------------------------------------------------------------------------------------------
+Script Path : C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\topic_extraction.py
+Command     : C:\Users\sabih\AppData\Local\Programs\Python\Python312\python.exe C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\topic_extraction.py
+Started At  : 2026-02-22 09:52:37
+Finished At : 2026-02-22 09:53:37
+Duration    : 60.12 seconds
+Exit Code   : 0
+
+Output:
+[STDOUT]
+================================================================================
+TOPIC EXTRACTION & CLUSTERING
+================================================================================
+Using topic range: [5, 7, 10]
+Using cluster range: [5, 7, 10]
+
+Loaded 18387 documents
+
+================================================================================
+VECTORIZATION
+================================================================================
+Bag of Words matrix shape: (18387, 374)
+TF-IDF matrix shape: (18387, 711)
+
+================================================================================
+LATENT DIRICHLET ALLOCATION (LDA) - TOPIC MODELING
+================================================================================
+
+Tuning topic count using coherence...
+
+Trying 5 topics...
+  Perplexity: 54.82
+  UMass coherence: -5.4349
+
+Trying 7 topics...
+  Perplexity: 48.21
+  UMass coherence: -5.1502
+
+Trying 10 topics...
+  Perplexity: 47.24
+  UMass coherence: -4.7819
+
+Selected LDA model: 10 topics (UMass coherence: -4.7819, perplexity: 47.24)
+
+Completed
+  Log likelihood: -146310.71
+  Perplexity: 47.24
+  UMass coherence: -4.7819
+
+--------------------------------------------------------------------------------
+TOP 10 WORDS PER TOPIC
+--------------------------------------------------------------------------------
+
+Topic 1:
+  building             - 3231.1000
+  entire               - 3124.1000
+  access               - 1047.1000
+  partial              - 227.1000
+  street               - 142.1001
+  light                - 124.1000
+  graffiti             - 76.1000
+  veh                  - 58.1000
+  sighting             - 54.1000
+  lamp                 - 54.1000
+
+Topic 2:
+  apartment            - 1736.1000
+  use                  - 307.7644
+  comment              - 189.1000
+  crosswalk            - 159.1000
+  wa                   - 148.1000
+  garbage              - 128.1000
+  recycling            - 120.1000
+  storage              - 112.1000
+  leak                 - 78.0993
+  sa                   - 67.1000
+
+Topic 3:
+  blocked              - 1174.4809
+  hydrant              - 1060.1000
+  request              - 178.1000
+  ceiling              - 126.1000
+  floor                - 113.1000
+  removal              - 113.1000
+  wc                   - 88.1000
+  residential          - 68.1003
+  kit                  - 68.1000
+  lead                 - 68.1000
+
+Topic 4:
+  commercial           - 225.1000
+  overnight            - 222.1000
+  parking              - 219.0999
+  blocking             - 212.1000
+  parked               - 211.1000
+  double               - 210.1000
+  car                  - 143.1000
+  truck                - 143.0999
+  traffic              - 115.1000
+  horn                 - 77.1000
+
+Topic 5:
+  pest                 - 227.1000
+  complaint            - 208.1000
+  pothole              - 145.1000
+  wall                 - 126.1000
+  driver               - 107.1000
+  basin                - 106.1000
+  passenger            - 106.1000
+  gas                  - 80.1021
+  electric             - 79.1000
+  range                - 79.1000
+
+Topic 6:
+  parking              - 653.1001
+  sign                 - 598.1000
+  violation            - 583.1007
+  posted               - 556.1000
+  trash                - 186.1006
+  water                - 179.6472
+  permit               - 168.1000
+  supply               - 148.1000
+  illegal              - 118.1001
+  improper             - 98.9031
+
+Topic 7:
+  loud                 - 1939.1000
+  music                - 1737.1000
+  party                - 1677.1000
+  talking              - 214.1000
+  controller           - 91.1000
+  bell                 - 59.1000
+  buzzer               - 59.1000
+  intercom             - 59.1000
+  riser                - 18.1000
+  steam                - 18.1000
+
+Topic 8:
+  banging              - 958.1000
+  pounding             - 958.1000
+  plate                - 307.1000
+  license              - 298.1000
+  vehicle              - 244.0989
+  derelict             - 137.1000
+  frame                - 133.1000
+  window               - 126.1000
+  shower               - 85.1000
+  bathtub              - 85.1000
+
+Topic 9:
+  heavy                - 102.1000
+  flow                 - 102.1000
+  leak                 - 92.1007
+  slow                 - 91.1000
+  violation            - 86.0993
+  route                - 79.1000
+  truck                - 78.1001
+  idling               - 61.1000
+  food                 - 61.1000
+  vendor               - 49.1000
+
+Topic 10:
+  sidewalk             - 322.1000
+  blocked              - 223.7191
+  mold                 - 179.1000
+  door                 - 168.1000
+  tree                 - 43.1000
+  roadway              - 36.1000
+  program              - 25.1000
+  cat                  - 18.1000
+  broken               - 17.1006
+  flooding             - 12.1001
+
+--------------------------------------------------------------------------------
+TOPIC DISTRIBUTION
+--------------------------------------------------------------------------------
+
+Document count per topic:
+  Topic 1: 5245 documents (28.53%)
+  Topic 2: 2357 documents (12.82%)
+  Topic 3: 1789 documents (9.73%)
+  Topic 4: 795 documents (4.32%)
+  Topic 5: 1284 documents (6.98%)
+  Topic 6: 1361 documents (7.40%)
+  Topic 7: 2139 documents (11.63%)
+  Topic 8: 1849 documents (10.06%)
+  Topic 9: 806 documents (4.38%)
+  Topic 10: 762 documents (4.14%)
+
+--------------------------------------------------------------------------------
+SAMPLE DOCUMENTS FROM EACH TOPIC
+--------------------------------------------------------------------------------
+
+Topic 1 - Sample documents:
+  1. access...
+  2. street light...
+  3. entire building...
+
+Topic 2 - Sample documents:
+  1. apartment...
+  2. leak use comment wa...
+  3. apartment...
+
+Topic 3 - Sample documents:
+  1. blocked hydrant...
+  2. lighting...
+  3. blocked hydrant...
+
+Topic 4 - Sample documents:
+  1. commercial overnight parking...
+  2. water wnw...
+  3. car/truck music...
+
+Topic 5 - Sample documents:
+  1. complaint detail...
+  2. complaint detail...
+  3. complaint detail...
+
+Topic 6 - Sample documents:
+  1. plumbingdefective/leaking/not maintained...
+  2. posted parking sign violation...
+  3. illegal hotel room residential building...
+
+Topic 7 - Sample documents:
+  1. loud music/party...
+  2. loud music/party...
+  3. loud music/party...
+
+Topic 8 - Sample documents:
+  1. license plate...
+  2. banging/pounding...
+  3. banging/pounding...
+
+Topic 9 - Sample documents:
+  1. noise construction before/after hour nm...
+  2. heavy flow...
+  3. trespassing...
+
+Topic 10 - Sample documents:
+  1. blocked sidewalk...
+  2. blocked sidewalk...
+  3. sidewalk staircase...
+
+================================================================================
+K-MEANS CLUSTERING
+================================================================================
+
+Tuning cluster count using silhouette...
+
+Trying 5 clusters...
+  Silhouette Score: 0.3835
+
+Trying 7 clusters...
+  Silhouette Score: 0.5035
+
+Trying 10 clusters...
+  Silhouette Score: 0.5627
+
+Completed
+Selected K-Means model: 10 clusters (silhouette: 0.5627)
+
+--------------------------------------------------------------------------------
+EVALUATION METRICS
+--------------------------------------------------------------------------------
+
+Silhouette Score: 0.5627 (higher is better)
+Davies-Bouldin Index: 0.9252 (lower is better)
+Inertia: 7427.16
+
+--------------------------------------------------------------------------------
+CLUSTER DISTRIBUTION
+--------------------------------------------------------------------------------
+
+Document count per cluster:
+  Cluster 1: 1736 documents (9.44%)
+  Cluster 2: 3123 documents (16.98%)
+  Cluster 3: 1677 documents (9.12%)
+  Cluster 4: 554 documents (3.01%)
+  Cluster 5: 820 documents (4.46%)
+  Cluster 6: 186 documents (1.01%)
+  Cluster 7: 227 documents (1.23%)
+  Cluster 8: 8153 documents (44.34%)
+  Cluster 9: 958 documents (5.21%)
+  Cluster 10: 953 documents (5.18%)
+
+--------------------------------------------------------------------------------
+TOP 10 TERMS FOR EACH CLUSTER
+--------------------------------------------------------------------------------
+
+Cluster 1:
+  apartment            - 1.0000
+  backup               - 0.0000
+  barking              - 0.0000
+  wiring               - 0.0000
+  access               - 0.0000
+  zoning nonconforming - 0.0000
+  zoning               - 0.0000
+  work permit          - 0.0000
+  work order           - 0.0000
+  work illegal         - 0.0000
+
+Cluster 2:
+  entire building      - 0.5796
+  entire               - 0.5795
+  building             - 0.5727
+  wiring               - 0.0000
+  access               - 0.0000
+  zoning nonconforming - 0.0000
+  zoning               - 0.0000
+  work permit          - 0.0000
+  work order           - 0.0000
+  work illegal         - 0.0000
+
+Cluster 3:
+  party                - 0.4520
+  music party          - 0.4520
+  loud music           - 0.4520
+  music                - 0.4473
+  loud                 - 0.4326
+  backup               - 0.0000
+  barking              - 0.0000
+  wiring               - 0.0000
+  access               - 0.0000
+  zoning nonconforming - 0.0000
+
+Cluster 4:
+  parking sign         - 0.3866
+  sign violation       - 0.3866
+  posted parking       - 0.3866
+  posted               - 0.3863
+  sign                 - 0.3800
+  violation            - 0.3704
+  parking              - 0.3477
+  ventilation equipment - 0.0000
+  backup               - 0.0000
+  barking              - 0.0000
+
+Cluster 5:
+  access               - 1.0000
+  ventilation equipment - 0.0000
+  backup               - 0.0000
+  barking              - 0.0000
+  wiring               - 0.0000
+  zoning nonconforming - 0.0000
+  zoning               - 0.0000
+  work permit          - 0.0000
+  work order           - 0.0000
+  work illegal         - 0.0000
+
+Cluster 6:
+  trash                - 1.0000
+  ventilation equipment - 0.0000
+  backup               - 0.0000
+  barking              - 0.0000
+  wiring               - 0.0000
+  access               - 0.0000
+  zoning nonconforming - 0.0000
+  zoning               - 0.0000
+  work permit          - 0.0000
+  work order           - 0.0000
+
+Cluster 7:
+  pest                 - 1.0000
+  ventilation equipment - 0.0000
+  backup               - 0.0000
+  barking              - 0.0000
+  wiring               - 0.0000
+  access               - 0.0000
+  zoning nonconforming - 0.0000
+  zoning               - 0.0000
+  work permit          - 0.0000
+  work order           - 0.0000
+
+Cluster 8:
+  sidewalk             - 0.0235
+  mold                 - 0.0220
+  blocked              - 0.0217
+  plate                - 0.0196
+  license              - 0.0193
+  license plate        - 0.0192
+  blocked sidewalk     - 0.0179
+  partial access       - 0.0176
+  partial              - 0.0176
+  loud talking         - 0.0171
+
+Cluster 9:
+  pounding             - 0.5774
+  banging pounding     - 0.5774
+  banging              - 0.5774
+  barking              - 0.0000
+  wiring               - 0.0000
+  access               - 0.0000
+  zoning nonconforming - 0.0000
+  zoning               - 0.0000
+  work permit          - 0.0000
+  work order           - 0.0000
+
+Cluster 10:
+  blocked hydrant      - 0.6011
+  hydrant              - 0.5848
+  blocked              - 0.5439
+  wiring               - 0.0000
+  access               - 0.0000
+  zoning nonconforming - 0.0000
+  zoning               - 0.0000
+  work permit          - 0.0000
+  work order           - 0.0000
+  work illegal         - 0.0000
+
+--------------------------------------------------------------------------------
+SAMPLE DOCUMENTS FROM EACH CLUSTER
+--------------------------------------------------------------------------------
+
+Cluster 1 - Sample documents:
+  1. apartment...
+  2. apartment...
+  3. apartment...
+
+Cluster 2 - Sample documents:
+  1. entire building...
+  2. entire building...
+  3. entire building...
+
+Cluster 3 - Sample documents:
+  1. loud music/party...
+  2. loud music/party...
+  3. loud music/party...
+
+Cluster 4 - Sample documents:
+  1. posted parking sign violation...
+  2. posted parking sign violation...
+  3. posted parking sign violation...
+
+Cluster 5 - Sample documents:
+  1. access...
+  2. access...
+  3. access...
+
+Cluster 6 - Sample documents:
+  1. trash...
+  2. trash...
+  3. trash...
+
+Cluster 7 - Sample documents:
+  1. pest...
+  2. pest...
+  3. pest...
+
+Cluster 8 - Sample documents:
+  1. blocked sidewalk...
+  2. license plate...
+  3. noise construction before/after hour nm...
+
+Cluster 9 - Sample documents:
+  1. banging/pounding...
+  2. banging/pounding...
+  3. banging/pounding...
+
+Cluster 10 - Sample documents:
+  1. blocked hydrant...
+  2. blocked hydrant...
+  3. blocked hydrant...
+
+================================================================================
+SAVING RESULTS
+================================================================================
+
+Results saved to: C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\topic_extraction_results.csv
+Added columns: 'LDA_Topic' and 'KMeans_Cluster'
+
+================================================================================
+TOPIC EXTRACTION AND CLUSTERING COMPLETED SUCCESSFULLY!
+================================================================================
+
+----------------------------------------------------------------------------------------------------
+STEP 4: advanced_topic_analysis.py
+----------------------------------------------------------------------------------------------------
+Script Path : C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\advanced_topic_analysis.py
+Command     : C:\Users\sabih\AppData\Local\Programs\Python\Python312\python.exe C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\advanced_topic_analysis.py
+Started At  : 2026-02-22 09:53:37
+Finished At : 2026-02-22 09:56:16
+Duration    : 159.48 seconds
+Exit Code   : 0
+
+Output:
+[STDOUT]
+================================================================================
+ADVANCED TOPIC ANALYSIS
+================================================================================
+Using topic range: [5, 7, 10]
+Using cluster range: [5, 7, 10]
+
+Loaded 18387 documents
+
+================================================================================
+VECTORIZATION WITH DOMAIN-SPECIFIC STOPWORDS
+================================================================================
+
+BoW matrix: (18387, 893)
+TF-IDF matrix: (18387, 893)
+Using n-grams: unigrams, bigrams, trigrams
+
+================================================================================
+DIMENSIONALITY REDUCTION (TruncatedSVD)
+================================================================================
+
+Reduced to 50 components
+Explained variance: 82.88%
+
+================================================================================
+LDA TOPIC MODELING - PARAMETER TUNING
+================================================================================
+
+Trying 5 topics...
+  Perplexity: 92.63
+  UMass coherence: -4.8063
+
+Trying 7 topics...
+  Perplexity: 78.93
+  UMass coherence: -4.6427
+
+Trying 10 topics...
+  Perplexity: 62.37
+  UMass coherence: -4.3186
+
+Best model: 10 topics (UMass coherence: -4.3186, perplexity: 62.37)
+
+--------------------------------------------------------------------------------
+TOP 15 WORDS PER TOPIC (10 topics)
+--------------------------------------------------------------------------------
+
+Topic 1:
+  music                     - 1737.1000
+  loud                      - 1725.1060
+  party                     - 1677.1000
+  music party               - 1677.1000
+  loud music                - 1677.1000
+  loud music party          - 1677.1000
+  trash                     - 186.0974
+  crosswalk                 - 159.1000
+  blocked crosswalk         - 159.1000
+  shower                    - 85.1000
+
+Topic 2:
+  blocked                   - 1398.1000
+  hydrant                   - 1021.1018
+  blocked hydrant           - 952.1000
+  sidewalk                  - 268.1044
+  blocked sidewalk          - 222.1000
+  window                    - 117.1004
+  garbage                   - 102.0997
+  window frame              - 100.1000
+  frame                     - 100.0998
+  storage                   - 89.1007
+
+Topic 3:
+  loud talking              - 214.1000
+  talking                   - 214.1000
+  loud                      - 214.0940
+  door                      - 119.9143
+  violation                 - 107.0977
+  route                     - 79.1000
+  truck route               - 78.1000
+  truck route violation     - 78.1000
+  route violation           - 78.1000
+  truck                     - 78.0996
+
+Topic 4:
+  building                  - 3231.1000
+  entire                    - 3124.1000
+  entire building           - 3122.1000
+  commercial                - 225.1000
+  overnight                 - 222.1000
+  parking                   - 211.1059
+  overnight parking         - 209.1000
+  commercial overnight parking - 209.1000
+  commercial overnight      - 209.1000
+  cabinet                   - 43.1000
+
+Topic 5:
+  access                    - 227.1088
+  partial                   - 227.1000
+  partial access            - 227.1000
+  mold                      - 179.1000
+  leak                      - 170.1000
+  truck                     - 143.1004
+  car                       - 143.1000
+  car truck                 - 137.1000
+  use                       - 118.0996
+  floor                     - 113.1000
+
+Topic 6:
+  banging                   - 958.1000
+  pounding                  - 958.1000
+  banging pounding          - 958.1000
+  plate                     - 307.1000
+  license                   - 298.1000
+  license plate             - 295.1000
+  water                     - 188.0996
+  supply                    - 148.1000
+  water supply              - 148.1000
+  light                     - 124.1000
+
+Topic 7:
+  apartment                 - 1736.1000
+  complaint                 - 208.1000
+  ceiling                   - 126.1000
+  driver                    - 107.1000
+  passenger                 - 106.1000
+  driver complaint          - 98.1000
+  controller                - 91.1000
+  basin                     - 79.1001
+  basin sink                - 78.1000
+  sink                      - 78.1000
+
+Topic 8:
+  access                    - 820.0912
+  sign                      - 598.1000
+  parking                   - 569.1058
+  violation                 - 562.1023
+  posted                    - 556.1000
+  posted parking sign       - 554.1000
+  parking sign violation    - 554.1000
+  sign violation            - 554.1000
+  posted parking            - 554.1000
+  parking sign              - 554.1000
+
+Topic 9:
+  vehicle                   - 244.1005
+  blocking                  - 212.1000
+  parked                    - 211.1000
+  parked blocking           - 210.1000
+  double parked blocking    - 210.1000
+  double                    - 210.1000
+  double parked             - 210.1000
+  pothole                   - 145.1000
+  derelict vehicle          - 137.1000
+  derelict                  - 137.1000
+
+Topic 10:
+  removal                   - 113.1000
+  noise                     - 111.1007
+  request                   - 110.1006
+  removal request           - 110.1000
+  construction              - 85.1000
+  sa                        - 67.1000
+  noise construction        - 63.1000
+  toilet                    - 58.1000
+  sewer                     - 53.1000
+  lighting                  - 52.1000
+
+--------------------------------------------------------------------------------
+LDA TOPIC LABELS (Interpretation)
+--------------------------------------------------------------------------------
+  Topic 1: music, loud, party
+  Topic 2: blocked, hydrant, blocked hydrant
+  Topic 3: loud talking, talking, loud
+  Topic 4: building, entire, entire building
+  Topic 5: access, partial, partial access
+  Topic 6: banging, pounding, banging pounding
+  Topic 7: apartment, complaint, ceiling
+  Topic 8: access, sign, parking
+  Topic 9: vehicle, blocking, parked
+  Topic 10: removal, noise, request
+
+================================================================================
+K-MEANS CLUSTERING - PARAMETER TUNING
+================================================================================
+
+Trying 5 clusters...
+  Silhouette: 0.4705
+
+Trying 7 clusters...
+  Silhouette: 0.5942
+
+Trying 10 clusters...
+  Silhouette: 0.6324
+
+Best model: 10 clusters (silhouette: 0.6324)
+
+--------------------------------------------------------------------------------
+TOP 10 TERMS PER CLUSTER (10 clusters)
+--------------------------------------------------------------------------------
+
+Cluster 1:
+  access                    - 1.0000
+  trespassing               - 0.0000
+  roadway                   - 0.0000
+  cabinet                   - 0.0000
+  bike                      - 0.0000
+  lane                      - 0.0000
+  blocked bike              - 0.0000
+  bike lane                 - 0.0000
+  blocked bike lane         - 0.0000
+  wc                        - 0.0000
+
+Cluster 2:
+  pest                      - 0.0283
+  trash                     - 0.0248
+  mold                      - 0.0223
+  loud talking              - 0.0180
+  talking                   - 0.0180
+  partial                   - 0.0178
+  partial access            - 0.0178
+  pothole                   - 0.0173
+  door                      - 0.0173
+  complaint                 - 0.0167
+
+Cluster 3:
+  entire building           - 0.5794
+  entire                    - 0.5793
+  building                  - 0.5731
+  building permit           - 0.0010
+  permit                    - 0.0006
+  hitting building          - 0.0003
+  residential building      - 0.0003
+  hitting                   - 0.0003
+  illegal                   - 0.0003
+  residential               - 0.0002
+
+Cluster 4:
+  sign                      - 0.3398
+  posted                    - 0.3379
+  parking sign violation    - 0.3379
+  sign violation            - 0.3379
+  posted parking            - 0.3379
+  parking sign              - 0.3379
+  posted parking sign       - 0.3379
+  violation                 - 0.3266
+  parking                   - 0.3046
+  sidewalk violation        - 0.0049
+
+Cluster 5:
+  apartment                 - 1.0000
+  trespassing               - 0.0000
+  roadway                   - 0.0000
+  food                      - 0.0000
+  truck music               - 0.0000
+  car truck music           - 0.0000
+  vendor                    - 0.0000
+  damp                      - 0.0000
+  damp spot                 - 0.0000
+  spot                      - 0.0000
+
+Cluster 6:
+  blocked hydrant           - 0.5993
+  hydrant                   - 0.5852
+  blocked                   - 0.5452
+  blocked sidewalk          - 0.0028
+  wc                        - 0.0025
+  blocked construction      - 0.0021
+  construction              - 0.0020
+  bike                      - 0.0020
+  blocked bike lane         - 0.0019
+  lane                      - 0.0019
+
+Cluster 7:
+  sidewalk                  - 0.6564
+  blocked sidewalk          - 0.5840
+  blocked                   - 0.3945
+  sidewalk violation        - 0.0352
+  violation                 - 0.0161
+  broken sidewalk           - 0.0131
+  broken                    - 0.0115
+  tree sidewalk             - 0.0103
+  tree sidewalk program     - 0.0103
+  program                   - 0.0103
+
+Cluster 8:
+  loud music                - 0.4116
+  music party               - 0.4116
+  loud music party          - 0.4116
+  party                     - 0.4116
+  music                     - 0.4079
+  loud                      - 0.3948
+  television                - 0.0018
+  loud television           - 0.0018
+  truck music               - 0.0011
+  car truck music           - 0.0011
+
+Cluster 9:
+  banging pounding          - 0.5774
+  pounding                  - 0.5774
+  banging                   - 0.5774
+  idling                    - 0.0000
+  engine                    - 0.0000
+  engine idling             - 0.0000
+  chronic                   - 0.0000
+  sidewalk                  - 0.0000
+  food                      - 0.0000
+  leak use comment          - 0.0000
+
+Cluster 10:
+  license                   - 0.5190
+  plate                     - 0.5189
+  license plate             - 0.5183
+  paper license             - 0.0415
+  paper license plate       - 0.0415
+  paper                     - 0.0415
+  license plate obscured    - 0.0390
+  plate obscured            - 0.0390
+  obscured                  - 0.0390
+  plate condition           - 0.0042
+
+--------------------------------------------------------------------------------
+K-MEANS CLUSTER LABELS (Interpretation)
+--------------------------------------------------------------------------------
+  Cluster 1: access, trespassing, roadway
+  Cluster 2: pest, trash, mold
+  Cluster 3: entire building, entire, building
+  Cluster 4: sign, posted, parking sign violation
+  Cluster 5: apartment, trespassing, roadway
+  Cluster 6: blocked hydrant, hydrant, blocked
+  Cluster 7: sidewalk, blocked sidewalk, blocked
+  Cluster 8: loud music, music party, loud music party
+  Cluster 9: banging pounding, pounding, banging
+  Cluster 10: license, plate, license plate
+
+================================================================================
+LDA vs K-MEANS COMPARISON
+================================================================================
+
+Cross-tabulation (% of LDA topic in each K-Means cluster):
+
+KMeans_Cluster     1      2      3      4   ...     7      8      9      10
+LDA_Topic                                   ...                            
+1               0.000  0.414  0.000  0.000  ...  0.000  0.586  0.000  0.000
+2               0.000  0.329  0.000  0.000  ...  0.138  0.000  0.000  0.000
+3               0.000  1.000  0.000  0.000  ...  0.000  0.000  0.000  0.000
+4               0.000  0.112  0.888  0.000  ...  0.000  0.000  0.000  0.000
+5               0.000  1.000  0.000  0.000  ...  0.000  0.000  0.000  0.000
+6               0.000  0.387  0.000  0.000  ...  0.000  0.000  0.468  0.145
+7               0.000  0.297  0.000  0.000  ...  0.000  0.000  0.000  0.000
+8               0.398  0.333  0.000  0.269  ...  0.000  0.000  0.000  0.000
+9               0.000  1.000  0.000  0.000  ...  0.000  0.000  0.000  0.000
+10              0.000  1.000  0.000  0.000  ...  0.000  0.000  0.000  0.000
+
+[10 rows x 10 columns]
+
+================================================================================
+GENERATING VISUALIZATIONS
+================================================================================
+
+Generating word clouds for LDA topics...
+  Saved: lda_wordclouds.png
+
+Generating t-SNE visualization...
+  Saved: tsne_visualization.png
+
+Generating distribution plots...
+  Saved: distribution_plots.png
+
+================================================================================
+SAVING OUTPUT
+================================================================================
+
+Saved to: C:\Users\sabih\OneDrive\Desktop\Project - Data Analysis\advanced_topic_analysis_results.csv
+Added columns: LDA_Topic, KMeans_Cluster
+Saved: analysis_summary.csv
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+[OK] Best LDA configuration: 10 topics
+[OK] Best LDA UMass coherence: -4.3186 (higher is better)
+[OK] Best K-Means configuration: 10 clusters with SVD
+
+[OK] Generated visualizations:
+  - lda_wordclouds.png
+  - tsne_visualization.png
+  - distribution_plots.png
+
+[OK] Cross-tabulation shows alignment between LDA and K-Means
+[OK] Using n-grams (1-3) captures meaningful phrases like 'blocked hydrant'
+
+Completed successfully!
+
