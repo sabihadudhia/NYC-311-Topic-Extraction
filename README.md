@@ -89,7 +89,7 @@ genuine semantic structure in the data rather than artefacts of
 either algorithm.
 
 Honest limitation: LDA Topics 1, 2, 6, and 8 collapsed into 
-K-Means Cluster 1 (mixed complaints), revealing vocabulary overlap 
+K-Means Cluster 8 (mixed complaints), revealing vocabulary overlap 
 between minor complaint categories. This reflects a known trade-off: 
 LDA captures mixed themes within documents while K-Means assigns 
 a single label per record making K-Means less suited to 
