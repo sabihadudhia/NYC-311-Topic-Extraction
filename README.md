@@ -3,12 +3,6 @@
 ## Overview
 This project analyzes New York City 311 service request data to identify common complaint themes using Natural Language Processing (NLP) and unsupervised machine learning. It processes raw complaint descriptions, converts them into numerical representations, and applies topic modeling and clustering techniques to uncover patterns and trends in municipal service issues.
 
-## Approach
-Dual-method NLP pipeline comparing LDA topic modelling and K-Means clustering on the same dataset to validate pattern consistency:
-- Text preprocessing → Bag of Words (LDA) and TF-IDF + TruncatedSVD (K-Means)
-- TruncatedSVD reduced TF-IDF matrix to 50 components, retaining 83.08% of variance
-- Both methods tuned to 10 topics/clusters
-
 ## Features
 - Automated text preprocessing (cleaning, stopword removal, lemmatization)
 - Text vectorization using Bag-of-Words and TF-IDF with n-grams
@@ -18,30 +12,100 @@ Dual-method NLP pipeline comparing LDA topic modelling and K-Means clustering on
 - Visualizations including word clouds, t-SNE plots, and distribution charts
 - Cross-analysis comparing LDA topics and K-Means clusters
 
+## Development Approach
+Two-stage pipeline development: basic vectorisation 
+(topic_extraction.py) followed by an advanced pipeline 
+(advanced_topic_analysis.py) incorporating domain-specific 
+stopwords, trigrams, and TruncatedSVD improving K-Means 
+Silhouette Score from 0.5627 to 0.6337 and LDA coherence 
+from -4.7819 to -3.9881.
+
 ## Results
 
-**LDA Topic Modelling**
-- Perplexity: 62.38 (good probabilistic fit)
-- UMass Coherence: -3.9881 (meaningful, interpretable topics)
-- 10 coherent topics extracted including: loud music/parties, 
-  blocked hydrants, building-wide complaints, parking violations, 
-  noise disturbances
+**Script Comparison: Basic vs Advanced Pipeline**
 
-**K-Means Clustering**
-- Silhouette Score: 0.6337
-- Davies-Bouldin Index: 0.6847 (strong, well-separated clusters)
-- 6 semantically labelled clusters confirmed including: pest/trash/mould, 
-  parking violations, blocked hydrants, loud music
+| Metric | Basic Pipeline | Advanced Pipeline |
+|---|---|---|
+| LDA Coherence (UMass) | -4.7819 | -3.9881 |
+| LDA Perplexity | 47.24 | 62.76 |
+| K-Means Silhouette | 0.5627 | 0.6337 |
+| K-Means Davies-Bouldin | 0.9252 | 0.6847 |
 
-**Key finding:** Both methods independently identified the same 
-structural patterns confirming genuine semantic consistency 
-in the dataset rather than artefacts of either method.
+The advanced pipeline (domain-specific stopwords + trigrams + 
+TruncatedSVD) outperformed the basic version on every meaningful 
+metric. All results below are from the advanced pipeline.
+
+---
+
+**Dimensionality Reduction**
+- TruncatedSVD reduced TF-IDF matrix to 50 components
+- Retained 83.08% of explained variance
+
+---
+
+**LDA Topic Modelling — 10 topics**
+- Perplexity: 62.76
+- UMass Coherence: -3.9881 (best across 5, 7, and 10 topic configurations)
+- Dominant topic: Building-wide complaints (28.53%, 5,245 documents)
+
+10 topics extracted:
+1. Commercial vehicle & overnight parking
+2. Double-parked & blocking traffic
+3. Entire building complaints
+4. Apartment complaints, banging/pounding, pest & mould
+5. Loud music & parties, license plate violations
+6. Water leaks & slow flow
+7. Parking sign violations & illegal parking
+8. Residential door, floor & gas complaints
+9. Partial access issues & truck route violations
+10. Blocked hydrants & sidewalks
+
+---
+
+**K-Means Clustering — 10 clusters**
+- Silhouette Score: 0.6337 (best across 5, 7, and 10 cluster configurations)
+- Davies-Bouldin Index: 0.6847 (lower is better — indicates well-separated clusters)
+- Inertia: 7,427.16
+
+10 clusters identified:
+1. Pest, trash & mould (1,736 documents, 9.44%)
+2. Entire building complaints (3,123 documents, 16.98%)
+3. Apartment complaints (1,677 documents, 9.12%)
+4. License plate violations (554 documents, 3.01%)
+5. Loud music & parties (820 documents, 4.46%)
+6. Banging & pounding noise (186 documents, 1.01%)
+7. Blocked hydrants (227 documents, 1.23%)
+8. Mixed complaints — sidewalk, license plate, noise (8,153 documents, 44.34%)
+9. Parking sign violations (958 documents, 5.21%)
+10. Blocked sidewalks (953 documents, 5.18%)
+
+---
+
+**Key Finding**
+Strong cross-method consistency on dominant themes: building 
+complaints, blocked hydrants, noise, and parking violations were 
+independently identified by both LDA and K-Means, confirming 
+genuine semantic structure in the data rather than artefacts of 
+either algorithm.
+
+Honest limitation: LDA Topics 1, 2, 6, and 8 collapsed into 
+K-Means Cluster 1 (mixed complaints), revealing vocabulary overlap 
+between minor complaint categories. This reflects a known trade-off: 
+LDA captures mixed themes within documents while K-Means assigns 
+a single label per record making K-Means less suited to 
+complaint types with overlapping terminology.
+
+---
 
 ## Methodological Note
-LDA is preferable for understanding mixed themes within a document. 
-K-Means suits segmentation and complaint routing workflows requiring 
-single-label assignment per record. Using both strengthens confidence 
-in the discovered patterns.
+LDA is preferable for understanding mixed themes within a document, 
+useful for exploratory analysis and policy insight. K-Means suits 
+complaint routing and triage workflows where each record requires a 
+single category label. The convergence of both methods on major 
+themes strengthens confidence in the discovered patterns. The 
+perplexity increase from basic (47.24) to advanced (62.76) pipeline 
+reflects a deliberate trade-off — sacrificing some predictive fit 
+for significantly more coherent, human-interpretable topics.
 
 ## Technologies
 - Python
