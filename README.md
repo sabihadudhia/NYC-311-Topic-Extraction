@@ -104,7 +104,7 @@ complaint routing and triage workflows where each record requires a
 single category label. The convergence of both methods on major 
 themes strengthens confidence in the discovered patterns. The 
 perplexity increase from basic (47.24) to advanced (62.76) pipeline 
-reflects a deliberate trade-off — sacrificing some predictive fit 
+reflects a deliberate trade-off, sacrificing some predictive fit 
 for significantly more coherent, human-interpretable topics.
 
 ## Technologies
