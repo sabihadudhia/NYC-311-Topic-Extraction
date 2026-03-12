@@ -42,6 +42,11 @@ metric. All results below are from the advanced pipeline.
 - Retained 83.08% of explained variance
 
 ---
+Distribution Plots: K-Means Clustering and LDA Topic Modeling
+
+<img width="4170" height="1466" alt="distribution_plots" src="https://github.com/user-attachments/assets/86e40d96-61e4-4c03-9519-bd1e3e8468f9" />
+
+---
 
 **LDA Topic Modelling — 10 topics**
 - Perplexity: 62.76
@@ -80,7 +85,11 @@ metric. All results below are from the advanced pipeline.
 10. Blocked sidewalks (953 documents, 5.18%)
 
 ---
+t-SNE visualization of 10 LDA topics (left) and 10 K-Means clusters (right) after TF-IDF vectorization and dimensionality reduction using Truncated SVD (50 components, 82.88% variance retained). The K-Means clusters show clearer spatial separation, supporting the silhouette score of 0.6337, while LDA topics exhibit more overlap due to their probabilistic nature.
 
+<img width="4663" height="1769" alt="tsne_visualization" src="https://github.com/user-attachments/assets/e8e79dfd-b863-4904-8618-82d361c27af3" />
+
+---
 **Key Finding**
 Strong cross-method consistency on dominant themes: building 
 complaints, blocked hydrants, noise, and parking violations were 
